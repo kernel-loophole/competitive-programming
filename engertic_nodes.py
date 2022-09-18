@@ -69,3 +69,7 @@ def calcluate_energy(test_check,engertic_matrix):
             print(test_check[i],"===>",engertic_matrix[test_check[i]-1])
         except:
             pass
+def main():
+    calcluate_energy
+if __name__=="__main__":
+    main()

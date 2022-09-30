@@ -34,6 +34,12 @@ def inorder(root, res):
         res.append(root.val)
         inorder(root.right, res)
 
+def preorder(root):
+    if root.left:
+        preorder(root.left)
+    print(root.val)
+    if root.right:
+        preorder(root.right)
 
 def tree_sort(arr):
     # Build BST

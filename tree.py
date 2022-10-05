@@ -32,6 +32,7 @@ def inorder(root, res):
     if root:
         inorder(root.left, res)
         res.append(root.val)
+        print(root.val)
         inorder(root.right, res)
 
 def preorder(root):

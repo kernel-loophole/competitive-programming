@@ -4,4 +4,9 @@ the frog jumps from its current vertex to another unvisited vertex if they are d
 The frog can not jump back to a visited vertex. 
 In case the frog can jump to several vertices, 
 it jumps randomly to one of them with the same probability.
-Otherwise, when the frog can not jump to any unvisited vertex, it jumps forever on the same vertex."""
+Otherwise, when the frog can not jump to any 
+unvisited vertex, it jumps forever on the same vertex."""
+class Solution:
+    def frogPosition(self, n, edge, t: int, target: int):
+        print()
+        

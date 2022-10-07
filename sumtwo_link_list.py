@@ -4,6 +4,14 @@ The digits are stored in reverse order, and each of their nodes contains a singl
 Add the two numbers and return the sum as a linked list.
 
 You may assume the two numbers do not contain any leading zero, except the number 0 itself. '''
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def mergeTwoLists(self, list1, list2):
+        return sum_link_list(list1,list2)
 def sum_list(l):
     final_number=''
     for i in l:
@@ -24,4 +32,5 @@ def sum_link_list(l1,l2):
 if __name__=="__main__":
     l1=[3,2,1]
     l2=[6,5,4]
-    sum_link_list(l1,l2)
+    s=Solution()
+    s.mergeTwoLists(l1,l2)

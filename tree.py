@@ -23,6 +23,11 @@ class node:
                     self.right = node(val)
                 else:
                     self.right.insert(val)
+            elif val == self.val:
+                if self.right is None:
+                    self.right = node(val)
+                else:
+                    self.right.insert(val)
         else:
             self.val = val
 

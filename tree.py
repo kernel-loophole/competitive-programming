@@ -31,7 +31,11 @@ class node:
                     self.right = node(val)
                 else:
                     self.right.insert(val)
+<<<<<<< HEAD
             elif val== self.val:
+=======
+            elif val == self.val:
+>>>>>>> refs/remotes/origin/main
                 if self.right is None:
                     self.right = node(val)
                 else:

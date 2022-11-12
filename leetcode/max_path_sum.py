@@ -1,14 +1,33 @@
-from tree import node
-from tree import inorder
-from tree import preorder
-# Definition for a binary tree node.
-# class TreeNode(object):
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
-
-
+"""
+the main module for tree 
+>>>tree insertion
+"""
+class node:
+    # BST data structure
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+    def insert(self, val):
+        if self.val:
+            if val < self.val:
+                if self.left is None:
+                    self.left = node(val)
+                else:
+                    self.left.insert(val)
+            elif val > self.val:
+                if self.right is None:
+                    self.right = node(val)
+                else:
+                    self.right.insert(val)
+            elif val== self.val:
+                if self.right is None:
+                    self.right = node(val)
+                else:
+                    self.right.insert(val)
+        else:
+            self.val = val
+list_no=[]
 class Solution(object):
     def maxPathSum(self, root):
         """
@@ -16,9 +35,10 @@ class Solution(object):
         :rtype: int
         """
         sum=0
-        x=add_to(root,sum)
+        x=final_fn(root,sum)
         print(x)
-list_no=[]
+        return max(x)
+
 def final_fn(root,count):
     if root:
         
@@ -32,7 +52,7 @@ def final_fn(root,count):
             
             list_no.append(y+root.val)
             final_fn(root.left,count)
-
+    return list_no
 
 
 
@@ -44,21 +64,16 @@ def add_to(root,sum_no):
         
         if root.left:
             return add_to(root.left,sum_no+root.left.val)
-    return sum_no
-                
-            
-
-        
-n=node(1)
-n.insert(2)
-n.insert(3)
-
-# n.insert(15)
-# n.insert(7)
+    return sum_no        
+n=node(-10)
+n.insert(9)
+n.insert(20)
+n.insert(15)
+n.insert(7)
 # inorder(n,[])
-# s=Solution()
-# s.maxPathSum(n)
-print(final_fn(n,0))
-print(list_no)
+s=Solution()
+print(s.maxPathSum(n))
+# print(final_fn(n,0))
+# print(list_no)
 # if __name__=="__main__":
 #     type_hint(12)

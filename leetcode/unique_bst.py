@@ -1,5 +1,4 @@
 from tree import node
-from tree import inorder
 from tree import preorder
 import numpy as np
 # Definition for a binary tree node.
@@ -13,13 +12,68 @@ def fac(n):
         return 1
     return n*fac(n-1)
 def make_insertion(root,num_list):
-    pass
+    current=True
+    for i in num_list:
+        if current:
+            n=node(i)
+            current=False
+            continue
+        n.insert(i)
+    tmp=inorder(n,[])
+    print(tmp)
+def right_side(root,res):
+    if root.right:
+        right_side(root.right,res)
+    res.append(root.val)
+    if root.left:
+        right_side(root.left,res)
+    #print(res)
+    return res
+
+def left_side(root,res):
+    if root.right:
+        left_side(root.right,res)
+    res.append(root.val)
+    if root.left:
+        left_side(root.left,res)
+    #print(res)
+    return res
+
+
+def inorder(root, res):
+    # Recursive traversal
+    if root:
+        #inorder(root.left, res)
+        if  root.left :
+           #res.append(root.right.val)
+           tmp_list=[]
+           x=left_side(root,tmp_list)
+           #print(x)
+#           if root.left.val in res:
+#                pass
+#            else:
+#                res.append(root.left.val) 
+        inorder(root.left, res)
+        if root.right:
+            tmp_list=[]
+            y=right_side(root,tmp_list)
+            #print(y)
+            if root.right.val in res:
+                pass
+            else:
+                res.append(root.right.val)
+            inorder(root.right, res)
+        
+        #print(root.val)
+        inorder(root.right, res)
+    return res
+
+
 
 class Solution():
     def generateTrees(self, n):
         """
-        :type n: int
-        :rtype: List[TreeNode]
+        :type n: int        :rtype: List[TreeNode]
         """
         nu=fac(n)
     #    final_list=[]
@@ -30,7 +84,7 @@ class Solution():
 
     #        # print(i)
         list_of_number=np.arange(1,n+1)
-        print(list_of_number)
+       # print(list_of_number)
         n_fac=fac(n)
         for i in  range(0,n_fac):
             current=False
@@ -39,12 +93,13 @@ class Solution():
                     new_node=node(j)
                     current=True
                     continue 
-                print("inserting ===>",j)
+        #        print("inserting ===>",j)
                 new_node.insert(j)
             tmp_list=inorder(new_node,[])
             tmp_list_1=preorder(new_node,[])
-            print(tmp_list)
-            print(tmp_list_1)
+           # print(tmp_list)
+          #  print(tmp_list_1)
+            make_insertion(n,tmp_list_1)
         
 
 if __name__=="__main__":

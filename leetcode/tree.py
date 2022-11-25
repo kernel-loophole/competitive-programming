@@ -14,12 +14,13 @@ class node:
     def insert(self, val):
         # if self.val==val:
         #     if self.left is None:
-        #             self.left = node(val)
-        #     if self.right is None:
         #         self.left = node(val)
+        #     if self.right is None:
+        #          self.left = node(val)
 
-        #     else:
-        #             self.left.insert(val)
+        #      else:
+        #          self.left.insert(val)
+        #
         if self.val:
             if val < self.val:
                 if self.left is None:
@@ -31,13 +32,47 @@ class node:
                     self.right = node(val)
                 else:
                     self.right.insert(val)
-            elif val== self.val:
-                if self.right is None:
-                    self.right = node(val)
-                else:
-                    self.right.insert(val)
-        else:
-            self.val = val
+
+
+#    if node
+#     return
+#
+# # Otherwise
+# if key < no
+#     node.le
+# else:
+#     node.ri
+#
+# # return th
+# return node
+#
+# #
+#
+#
+#
+#
+#
+# return th
+# return node
+
+#        if self.val:
+#            if val < self.val:
+#                if self.left is None:
+#                    self.left = node(val)
+#                else:
+#                    self.left.insert(val)
+#            elif val > self.val:
+#                if self.right is None:
+#                    self.right = node(val)
+#                else:
+#                    self.right.insert(val)
+#            elif val== self.val:
+#                if self.right is None:
+#                    self.right = node(val)
+#                else:
+#                    self.right.insert(val)
+#        else:
+#            self.val = val
 
 
 def inorder(root, res):
@@ -45,15 +80,19 @@ def inorder(root, res):
     if root:
         inorder(root.left, res)
         res.append(root.val)
-        print(root.val)
+        # print(root.val)
         inorder(root.right, res)
+    return res
 
-def preorder(root):
-    if root.left:
-        preorder(root.left)
-    print(root.val)
+
+def preorder(root, res_list):
     if root.right:
-        preorder(root.right)
+        preorder(root.right, res_list)
+    res_list.append(root.val)
+    if root.left:
+        preorder(root.left, res_list)
+    return res_list
+
 
 def tree_sort(arr):
     # Build BST
@@ -66,4 +105,3 @@ def tree_sort(arr):
     res = []
     inorder(root, res)
     return res
-

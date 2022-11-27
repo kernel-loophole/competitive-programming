@@ -37,6 +37,13 @@ def test_tree(root, res):
             print(x)
             res.append(x)
         print(root.val)
+        if root.left:
+            root_right = root.left
+            root_left = root.left.right
+            root = root_right
+            x = inorder(root, [])
+            print(x)
+            res.append(x)
 
         test_tree(root.right, res)
         test_tree(root.left, res)
@@ -103,8 +110,25 @@ def inorder_(root, res):
             y = right_side(root, tmp_list)
             # print(root.val)
         inorder(root.left, res)
-
-
+def right_only(root):
+    if root:
+        if root.right:
+            tmp_root=root.right
+            left_root=root
+            root=tmp_root
+            root.left=left_root
+            print("right")
+            print("change val of {0} with {1} ".format(root.val,left_root.val),)
+        if root.left:
+            print("left======>",root.left.val)
+        print(root.val)
+        right_only(root.right)
+    return root
+def test_(root):
+    if root:
+        print(root.val)
+    test_(root.right)
+    test_(root.left)
 class Solution:
     def generateTrees(self, n):
         """
@@ -132,13 +156,10 @@ class Solution:
                 new_node.insert(j)
             # tmp_list = inorder(new_node, [])
             # tmp_list_1 = preorder(new_node, [])
-
-        x = test_tree(new_node, [])
-
-        print(x)
-        # print(tmp_list)
-        #  print(tmp_list_1)
-        # make_insertion(n, tmp_list_1)
+        #
+        # x = test_tree(new_node, [])
+        x=right_only(new_node)
+        test_(x)
 
 
 if __name__ == "__main__":

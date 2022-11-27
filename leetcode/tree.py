@@ -1,5 +1,5 @@
 """
-the main module for tree 
+the main module for tree
 >>>tree insertion
 """
 
@@ -12,24 +12,20 @@ class node:
         self.right = None
 
     def insert(self, val):
-        # if self.val==val:
-        #     if self.left is None:
-        #         self.left = node(val)
-        #     if self.right is None:
-        #          self.left = node(val)
-
-        #      else:
-        #          self.left.insert(val)
-        #
         if self.val:
+
             if val < self.val:
                 if self.left is None:
                     self.left = node(val)
+                    # self.left.right=None
+                    # self.left.left=None
                 else:
                     self.left.insert(val)
             elif val > self.val:
                 if self.right is None:
                     self.right = node(val)
+                    # self.right.left=None
+                    # self.right.right=None
                 else:
                     self.right.insert(val)
 

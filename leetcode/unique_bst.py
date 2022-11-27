@@ -15,6 +15,34 @@ def fac(n):
     return n * fac(n - 1)
 
 
+def inorder_test(root, res):
+    # Recursive traversal
+
+    if root:
+        inorder(root.left, res)
+        res.append(root.val)
+        # print(root.val)
+        inorder(root.right, res)
+        return res
+
+
+def test_tree(root, res):
+    if root:
+
+        if root.right:
+            root_right = root.right
+            root_left = root.right.right
+            root = root_right
+            x = inorder(root, [])
+            print(x)
+            res.append(x)
+        print(root.val)
+
+        test_tree(root.right, res)
+        test_tree(root.left, res)
+    return res
+
+
 def make_insertion(root, num_list):
     current = True
     for i in num_list:
@@ -23,8 +51,7 @@ def make_insertion(root, num_list):
             current = False
             continue
         n.insert(i)
-    tmp = inorder(n, [])
-    print(tmp)
+    return n
 
 
 def right_side(root, res):
@@ -50,30 +77,32 @@ def left_side(root, res):
 def inorder(root, res):
     # Recursive traversal
     if root:
+        inorder(root.right, res)
+        res.append(root.val)
+        print(root.val)
+        inorder(root.left, res)
+    return res
+
+
+def inorder_(root, res):
+    # Recursive traversal
+    if root:
         # inorder(root.left, res)
-        if root.left:
+        if root.right:
             # res.append(root.right.val)
             tmp_list = []
-            x = left_side(root, tmp_list)
-            # print(x)
+            x = right_side(root, tmp_list)
+        # print(x)
         #           if root.left.val in res:
         #                pass
         #            else:
         #                res.append(root.left.val)
-        inorder(root.left, res)
-        if root.right:
+        inorder(root.right, res)
+        if root.left:
             tmp_list = []
             y = right_side(root, tmp_list)
-            # print(y)
-            if root.right.val in res:
-                pass
-            else:
-                res.append(root.right.val)
-            inorder(root.right, res)
-
-        # print(root.val)
-        inorder(root.right, res)
-    return res
+            # print(root.val)
+        inorder(root.left, res)
 
 
 class Solution:
@@ -101,16 +130,20 @@ class Solution:
                     continue
                 #        print("inserting ===>",j)
                 new_node.insert(j)
-            tmp_list = inorder(new_node, [])
-            tmp_list_1 = preorder(new_node, [])
-            # print(tmp_list)
-            #  print(tmp_list_1)
-            make_insertion(n, tmp_list_1)
+            # tmp_list = inorder(new_node, [])
+            # tmp_list_1 = preorder(new_node, [])
+
+        x = test_tree(new_node, [])
+
+        print(x)
+        # print(tmp_list)
+        #  print(tmp_list_1)
+        # make_insertion(n, tmp_list_1)
 
 
 if __name__ == "__main__":
     s = Solution()
-    s.generateTrees(3)
+    s.generateTrees(5)
 #  n=node(10)
 #  n.insert(9)
 #  inorded(n,[])

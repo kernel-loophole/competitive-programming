@@ -1,6 +1,6 @@
 # ===============>finding the score of rock paper sessor=========>
 # given the  text file input
-#
+
 with open("rock_pa.txt", "r") as file:
     file_read = file.readlines()
 A = 1
@@ -54,5 +54,4 @@ for i in file_read:
         total = total + 3 + 3
     if i[0] == "C" and i[2] == "Z":
         total = total + 1 + 6
-
-print(total)
+# print("testing it ==========>")

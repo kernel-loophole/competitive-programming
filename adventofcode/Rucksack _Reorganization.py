@@ -1,4 +1,4 @@
-with open('Rucksack.txt','r') as file:
+with open('input_data.txt','r') as file:
     content=file.readlines()
 final_socre_list=[]
 groups=[]
@@ -22,6 +22,7 @@ for i in content:
         list_1=list(groups[0])
         list_2=list(groups[1])
         list_3=list(groups[2])
+        #part two
         for l in list_1:
             if l in list_2 and l in list_3:
                 if l.isupper():

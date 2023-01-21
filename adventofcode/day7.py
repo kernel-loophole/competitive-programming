@@ -4,27 +4,28 @@ def count_string():
 total=0
 def content_finder(string,content):
     dir_content=[]
+    flag=False
     for i in content:
-        if i.startswith(string):
+        if i.startswith("$ cd"+string):
             dir_content.append(i)
-        if i.startswith("$"):
+        if i.startswith("$") and flag==True:
             break
-    print(content)
-
+    print(dir_content)
 def dir_locator(dir,string):
     tmp_list=[]
-    dir_count=""
     flag=False
     for i in string:
         if i.startswith('$ cd') and flag==True:
             break
         if flag:
-            if i.startswith("dir"):
-                content_finder(i,string)
-            else:
-                tmp_list.append(i)
+            tmp_list.append(i)
         if i.startswith(dir):
             flag=True
+    for i in tmp_list:
+        if i.startswith('dir'):
+            content_finder(i,string)
+        else:
+            pass
 
 def find_dir(list_string):
     for i in list_string:

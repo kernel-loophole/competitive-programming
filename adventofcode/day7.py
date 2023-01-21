@@ -1,6 +1,7 @@
 import re
 def count_string():
     pass
+total=0
 def content_finder(string,content):
     dir_content=[]
     for i in content:
@@ -8,20 +9,22 @@ def content_finder(string,content):
             dir_content.append(i)
         if i.startswith("$"):
             break
-    print(dir_content)
+    print(content)
+
 def dir_locator(dir,string):
     tmp_list=[]
+    dir_count=""
     flag=False
     for i in string:
         if i.startswith('$ cd') and flag==True:
-            print('break')
             break
         if flag:
-            tmp_list.append(i)
-            
+            if i.startswith("dir"):
+                content_finder(i,string)
+            else:
+                tmp_list.append(i)
         if i.startswith(dir):
             flag=True
-    print(tmp_list)
 
 def find_dir(list_string):
     for i in list_string:

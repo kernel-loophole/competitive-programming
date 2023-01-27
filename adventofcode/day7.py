@@ -34,6 +34,7 @@ def find_dir(list_string):
         if i.startswith('dir'):
             print(i)
         if i.startswith('$ cd'):
+            
             dir_locator(i,list_string)
 def open_file(file_name):
     total_sum=0

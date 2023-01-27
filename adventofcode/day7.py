@@ -5,6 +5,8 @@ total=0
 def content_finder(string,content):
     dir_content=[]
     flag=False
+    str="$ cd "+string
+    print(str)
     for i in content:
         if i.startswith("$ cd"+string):
             dir_content.append(i)
@@ -23,7 +25,7 @@ def dir_locator(dir,string):
             flag=True
     for i in tmp_list:
         if i.startswith('dir'):
-            content_finder(i,string)
+            content_finder(i[4:5],string)
         else:
             pass
 

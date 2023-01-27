@@ -1,5 +1,11 @@
 import re
-def recursively_find(dir_string:str,file_content:str):
+def sum_the_str(list_of_checks:list,total:int):
+    for j in list_of_checks:
+            x=re.findall('[0-9]+',j)
+            total=total+int(x[0])
+            print("total size of dir",total)
+def recursively_find(dir_string:str,file_content:str,total_size:int):
+    print("finding the ",dir_string)
     check_dir=[]
     str_check=''
     flag=False
@@ -14,31 +20,33 @@ def recursively_find(dir_string:str,file_content:str):
             else:
                 flag=False
         if i.startswith('$ cd '+dir_string):
-            print("find====>",i)
+            # print("find====>",i)
             if flag==False:
                 flag=True
             else:
-                flag=False 
-    print(check_dir)         
+                flag=False
+    print(check_dir)
+    
     if 'dir' in str_check:
         for i in check_dir:
-            print(i)
             if i.startswith('dir'):
-                x=re.findall('[0-9]+',i)
-                total_size_of_dir=total_size_of_dir+int(x[0])
-                print("total size of dir",total_size_of_dir)
-                print("check find")
+                # print("check find")
                 dir_string=i[len(i)-2]
                 recursively_find(dir_string,file_content)
-    else:
-        return check_dir        
+    for i in check_dir:
+        for k in re.findall('[0-9]+',i):
+            total_size_of_dir=total_size_of_dir+int(k)
+            print("sum",k)
+    total_size=total_size+total_size_of_dir
+    return total_size
 def find_dir(list_string:__file__)->str:
+    total=0
     for i in list_string:
         try:
             if i.startswith('dir'):
                 # print(i[len(i)-2])
                 dir_string=i[len(i)-2]
-                print(recursively_find(dir_string,list_string))
+                print(recursively_find(dir_string,list_string,total))
         except:
             pass
         if i.startswith('$ cd'):

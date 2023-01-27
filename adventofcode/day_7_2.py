@@ -4,8 +4,7 @@ def sum_the_str(list_of_checks:list,total:int):
             x=re.findall('[0-9]+',j)
             total=total+int(x[0])
             print("total size of dir",total)
-def recursively_find(dir_string:str,file_content:str,total_size:int):
-    print("finding the ",dir_string)
+def recursively_find(dir_string:str,file_content:str,total_size:int,dir_mapping:dict):
     check_dir=[]
     str_check=''
     flag=False
@@ -26,31 +25,44 @@ def recursively_find(dir_string:str,file_content:str,total_size:int):
             else:
                 flag=False
     print(check_dir)
-    
     if 'dir' in str_check:
         for i in check_dir:
             if i.startswith('dir'):
-                # print("check find")
                 dir_string=i[len(i)-2]
-                recursively_find(dir_string,file_content)
+                # recursively_find(dir_string,file_content)
     for i in check_dir:
         for k in re.findall('[0-9]+',i):
             total_size_of_dir=total_size_of_dir+int(k)
-            print("sum",k)
-    total_size=total_size+total_size_of_dir
-    return total_size
+            # print("sum",k)
+    total_size=total_size+total_size_of_dir    
+    if dir_string in dir_mapping:
+        tmp=dir_mapping[dir_string]
+        print("tmp===>",tmp)
+        print("total====>",total_size)
+        dir_mapping[dir_string]=tmp+total_size*2
+    else:
+        dir_mapping[dir_string]=total_size
+    return dir_mapping
 def find_dir(list_string:__file__)->str:
     total=0
+    dir_mapping={}
     for i in list_string:
         try:
             if i.startswith('dir'):
                 # print(i[len(i)-2])
-                dir_string=i[len(i)-2]
-                print(recursively_find(dir_string,list_string,total))
+                print("dir ")
+                dir_string=i[4:len(i)]
+
+                print(recursively_find(dir_string,list_string,total,dir_mapping))
         except:
             pass
         if i.startswith('$ cd'):
             pass
+    final_output=0
+    for total_sum in dir_mapping.values():
+        if total_sum<100000:
+            final_output=final_output+total_sum
+    print(final_output)
 def open_file(file_name):
     total_sum=0
     with open(file_name,'r') as f:

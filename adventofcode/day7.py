@@ -1,52 +1,30 @@
-import re
-def count_string():
-    pass
-total=0
-def content_finder(string,content):
-    dir_content=[]
-    flag=False
-    str="$ cd "+string
-    print(str)
-    for i in content:
-        if i.startswith("$ cd"+string):
-            dir_content.append(i)
-        if i.startswith("$") and flag==True:
-            break
-    print(dir_content)
-def dir_locator(dir,string):
-    tmp_list=[]
-    flag=False
-    for i in string:
-        if i.startswith('$ cd') and flag==True:
-            break
-        if flag:
-            tmp_list.append(i)
-        if i.startswith(dir):
-            flag=True
-    for i in tmp_list:
-        if i.startswith('dir'):
-            content_finder(i[4:5],string)
-        else:
-            pass
+def sum_dir(idx):
+  sum = 0
+  while True:
+    row = rows[idx]
+    print(row)
+    try:
+      sum += int(row.split(' ')[0])
+    except:
+      ValueError
+    # if sub directory:
+    if row[:5] == '$ cd ' and row != '$ cd ..':
+      sub_dir = sum_dir(idx+1)
+      sub_sum = sub_dir[0]
+      idx = sub_dir[1]
+      dir_sums.append(sub_sum)
+      sum += sub_sum
+    if row == '$ cd ..' or idx == len(rows)-1:
+      return (sum, idx)
+    idx += 1
 
-def find_dir(list_string):
-    for i in list_string:
-        if i.startswith('dir'):
-            print(i)
-        if i.startswith('$ cd'):
-            
-            dir_locator(i,list_string)
-def open_file(file_name):
-    total_sum=0
-    with open(file_name,'r') as f:
-        plaintext=f.readlines()
-    find_dir(plaintext)
-    # for i in plaintext:
-    #     x=re.findall('[0-9]+',i)
-    #     try:
-    #         total_sum=total_sum+int(x[0])
-    #     except:
-    #         pass
-    # print(total_sum)
-if __name__=="__main__":
-    open_file("day7_input.txt")
+with open('day7_input.txt', 'r') as input_data:
+  rows = [line.strip() for line in input_data.readlines()]
+
+dir_sums = []
+dir_sums.append(sum_dir(1)[0])
+print('part 1:', sum([x for x in dir_sums if x <= 100000]))
+
+free_space = 70000000 - dir_sums[-1]
+needed_space = 30000000 - free_space
+print('part 2:', min([x for x in dir_sums if x >= needed_space]))

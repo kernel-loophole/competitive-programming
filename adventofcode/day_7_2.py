@@ -34,7 +34,7 @@ def recursively_find(dir_string:str,file_content:str,total_size:int,dir_mapping:
         for k in re.findall('[0-9]+',i):
             total_size_of_dir=total_size_of_dir+int(k)
             # print("sum",k)
-    total_size=total_size+total_size_of_dir    
+    total_size=total_size+total_size_of_dir
     if dir_string in dir_mapping:
         tmp=dir_mapping[dir_string]
         print("tmp===>",tmp)
@@ -52,7 +52,6 @@ def find_dir(list_string:__file__)->str:
                 # print(i[len(i)-2])
                 print("dir ")
                 dir_string=i[4:len(i)]
-
                 print(recursively_find(dir_string,list_string,total,dir_mapping))
         except:
             pass
@@ -60,7 +59,7 @@ def find_dir(list_string:__file__)->str:
             pass
     final_output=0
     for total_sum in dir_mapping.values():
-        if total_sum<100000:
+        if total_sum<=100000:
             final_output=final_output+total_sum
     print(final_output)
 def open_file(file_name):
